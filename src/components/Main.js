@@ -8,9 +8,11 @@ import { bindActionCreators } from 'redux'
 import { fetchUser } from '../redux/actions/index'
 import FeedScreen from './main/Feed'
 import ProfileScreen from './main/Profile'
-import AddScreen from './main/Add'
 
 const Tab = createBottomTabNavigator();
+const EmptyScreen = () => {
+    return (null);
+}
 
 export class Main extends Component {
     componentDidMount() {
@@ -24,7 +26,7 @@ export class Main extends Component {
             )
         }
         return (
-            <Tab.Navigator>
+            <Tab.Navigator initialRouteName="Feed">
                 <Tab.Screen 
                     name="Feed" 
                     component={ FeedScreen }
@@ -39,8 +41,8 @@ export class Main extends Component {
                     }} 
                 />
                 <Tab.Screen 
-                    name="Add" 
-                    component={ AddScreen }
+                    name="AddContainer" 
+                    component={ EmptyScreen }
                     options={{
                         tabBarIcon: ({color, size}) => (
                             <MaterialCommunityIcons 
@@ -49,7 +51,13 @@ export class Main extends Component {
                             size={26}
                             />
                             )
-                        }} 
+                        }}
+                    listeners={({ navigation }) => ({
+                        tabPress: (event) => {
+                            event.preventDefault();
+                            navigation.navigate('Add')
+                        }
+                    })} 
                 />
                 <Tab.Screen 
                     name="Profile" 
