@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, LogBox } from 'react-native'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './src/redux/reducers'
@@ -46,6 +46,7 @@ export class App extends Component {
     }
 
     componentDidMount() {
+        LogBox.ignoreLogs(['Setting a timer']);
         firebase.auth().onAuthStateChanged((user) => {
             if (!user) {
                 this.setState({
@@ -101,7 +102,7 @@ export class App extends Component {
                         <Stack.Screen
                             name="Main"
                             component={MainScreen}
-                            options={{ headerShown: false }}
+                            options={{ headerShown: true }}
                             navigation={this.props.navigation}
                         />
                         <Stack.Screen
