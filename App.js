@@ -102,6 +102,7 @@ export class App extends Component {
                             name="Main"
                             component={MainScreen}
                             options={{ headerShown: false }}
+                            navigation={this.props.navigation}
                         />
                         <Stack.Screen
                             name="Add"

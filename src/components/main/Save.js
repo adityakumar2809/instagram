@@ -5,7 +5,7 @@ import 'firebase/firestore';
 require('firebase/firestore')
 require('firebase/firebase-storage')
 
-export default function Save(props, {navigation}) {
+export default function Save(props) {
 
     const [caption, setCaption] = useState('');
     const uploadImage = async () => {
@@ -48,7 +48,7 @@ export default function Save(props, {navigation}) {
                 caption,
                 creation: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => (
-                navigation.popToTop()
+                props.navigation.popToTop()
             ))
     }
 
