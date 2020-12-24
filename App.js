@@ -9,17 +9,17 @@ const store = createStore(rootReducer, applyMiddleware(thunk))
 
 import * as firebase from 'firebase'
 const firebaseConfig = {
-  apiKey: "AIzaSyAmuwh_wEEkDtHUB6PyiYWIN0OEc_eCex0",
-  authDomain: "instagram-dev-934dd.firebaseapp.com",
-  projectId: "instagram-dev-934dd",
-  storageBucket: "instagram-dev-934dd.appspot.com",
-  messagingSenderId: "560141181233",
-  appId: "1:560141181233:web:3dd7a2142f32474755d010",
-  measurementId: "G-5YX4BEPN6L"
+    apiKey: "AIzaSyAmuwh_wEEkDtHUB6PyiYWIN0OEc_eCex0",
+    authDomain: "instagram-dev-934dd.firebaseapp.com",
+    projectId: "instagram-dev-934dd",
+    storageBucket: "instagram-dev-934dd.appspot.com",
+    messagingSenderId: "560141181233",
+    appId: "1:560141181233:web:3dd7a2142f32474755d010",
+    measurementId: "G-5YX4BEPN6L"
 };
 
-if(firebase.apps.length === 0) {
-  firebase.initializeApp(firebaseConfig);
+if (firebase.apps.length === 0) {
+    firebase.initializeApp(firebaseConfig);
 }
 
 import { NavigationContainer } from '@react-navigation/native'
@@ -36,76 +36,84 @@ import MainScreen from './src/components/Main'
 const Stack = createStackNavigator()
 
 export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loaded: false,
+    constructor(props) {
+        super(props);
+        this.state = {
+            loaded: false,
+        }
     }
-  }
 
-  componentDidMount(){
-    firebase.auth().onAuthStateChanged((user) => {
-      if(!user){
-        this.setState({
-          loggedIn: false,
-          loaded: true
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (!user) {
+                this.setState({
+                    loggedIn: false,
+                    loaded: true
+                })
+            } else {
+                this.setState({
+                    loggedIn: true,
+                    loaded: true
+                })
+            }
         })
-      } else {
-        this.setState({
-          loggedIn: true,
-          loaded: true
-        })
-      }
-    })
-  }
-
-  render() {
-    const { loggedIn, loaded } = this.state;
-    
-    if (!loaded) {
-      return(
-        <View style={ styles.containerStyle }>
-          <Text>Loading...</Text>
-        </View>
-      )
-    }
-    
-    if (!loggedIn) {
-      return (
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Landing">
-            <Stack.Screen 
-              name="Landing" 
-              component={LandingScreen} 
-              options={{ headerShown: false }} 
-            />
-            <Stack.Screen 
-              name="Register" 
-              component={RegisterScreen}
-            />
-            <Stack.Screen 
-              name="Login" 
-              component={LoginScreen}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      );
     }
 
-    return(
-      <Provider store={store}>
-        <MainScreen/>
-      </Provider>
-    )
-    
-  }
+    render() {
+        const { loggedIn, loaded } = this.state;
+
+        if (!loaded) {
+            return (
+                <View style={styles.containerStyle}>
+                    <Text>Loading...</Text>
+                </View>
+            )
+        }
+
+        if (!loggedIn) {
+            return (
+                <NavigationContainer>
+                    <Stack.Navigator initialRouteName="Landing">
+                        <Stack.Screen
+                            name="Landing"
+                            component={LandingScreen}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="Register"
+                            component={RegisterScreen}
+                        />
+                        <Stack.Screen
+                            name="Login"
+                            component={LoginScreen}
+                        />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            );
+        }
+
+        return (
+            <Provider store={store}>
+                <NavigationContainer>
+                    <Stack.Navigator initialRouteName="Main">
+                        <Stack.Screen
+                            name="Main"
+                            component={MainScreen}
+                            options={{ headerShown: false }}
+                        />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </Provider>
+        )
+
+    }
 }
 
 const styles = StyleSheet.create({
-  containerStyle: {
-      flex: 1,
-      justifyContent: 'center'
-  },
+    containerStyle: {
+        flex: 1,
+        justifyContent: 'center'
+    },
 });
 
 export default App
