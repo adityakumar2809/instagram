@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './src/redux/reducers'
+import thunk from 'redux-thunk'
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 import * as firebase from 'firebase'
 const firebaseConfig = {
@@ -22,6 +28,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import LandingScreen from './src/components/auth/Landing'
 import RegisterScreen from './src/components/auth/Register'
 import LoginScreen from './src/components/auth/Login'
+import MainScreen from './src/components/Main'
 
 
 
@@ -86,9 +93,9 @@ export class App extends Component {
     }
 
     return(
-      <View style={ styles.containerStyle }>
-        <Text>User is logged in...</Text>
-      </View>
+      <Provider store={store}>
+        <MainScreen/>
+      </Provider>
     )
     
   }
