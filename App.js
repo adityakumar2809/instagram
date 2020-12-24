@@ -30,6 +30,7 @@ import RegisterScreen from './src/components/auth/Register'
 import LoginScreen from './src/components/auth/Login'
 import MainScreen from './src/components/Main'
 import AddScreen from './src/components/main/Add'
+import SaveScreen from './src/components/main/Save'
 
 
 
@@ -105,6 +106,11 @@ export class App extends Component {
                         <Stack.Screen
                             name="Add"
                             component={AddScreen}
+                            navigation={this.props.navigation}
+                        />
+                        <Stack.Screen
+                            name="Save"
+                            component={SaveScreen}
                         />
                     </Stack.Navigator>
                 </NavigationContainer>

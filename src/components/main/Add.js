@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 
-export default function App() {
+export default function Add({navigation}) {
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
     const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
     const [camera, setCamera] = useState(null);
@@ -78,6 +78,12 @@ export default function App() {
                     title="Pick Image From Gallery"
                     onPress={() => (
                         pickImage()
+                    )}
+                />
+                <Button
+                    title="Save"
+                    onPress={() => (
+                        navigation.navigate('Save', {image})
                     )}
                 />
                 {
