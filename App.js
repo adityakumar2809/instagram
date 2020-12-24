@@ -111,6 +111,7 @@ export class App extends Component {
                         <Stack.Screen
                             name="Save"
                             component={SaveScreen}
+                            navigation={this.props.navigation}
                         />
                     </Stack.Navigator>
                 </NavigationContainer>
