@@ -5,6 +5,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import firebase from 'firebase'
+
 import { fetchUser, fetchUserPosts } from '../redux/actions/index'
 import FeedScreen from './main/Feed'
 import ProfileScreen from './main/Profile'
@@ -45,6 +47,7 @@ export class Main extends Component {
                 <Tab.Screen
                     name="Search"
                     component={SearchScreen}
+                    navigation = {this.props.navigation}
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons
@@ -86,6 +89,15 @@ export class Main extends Component {
                             />
                         )
                     }}
+                    listeners={({ navigation }) => ({
+                        tabPress: (event) => {
+                            event.preventDefault();
+                            navigation.navigate(
+                                'Profile', 
+                                {uid: firebase.auth().currentUser.uid}
+                            )
+                        }
+                    })}
                 />
             </Tab.Navigator>
         )
