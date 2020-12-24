@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { Camera } from 'expo-camera';
 
 export default function App() {
@@ -21,43 +21,39 @@ export default function App() {
     }
     return (
         <View style={styles.containerStyle}>
-            <Camera style={styles.cameraStyle} type={type}>
-                <View style={styles.buttonContainerStyle}>
-                    <TouchableOpacity
-                        style={styles.buttonStyle}
-                        onPress={() => {
-                            setType(
-                                type === Camera.Constants.Type.back
-                                    ? Camera.Constants.Type.front
-                                    : Camera.Constants.Type.back
-                            );
-                        }}>
-                        <Text style={styles.textStyle}> Flip </Text>
-                    </TouchableOpacity>
-                </View>
-            </Camera>
+            <View style={styles.cameraContainerStyle}>
+                <Camera 
+                    style={styles.cameraStyle} 
+                    type={type}
+                    ratio={'1:1'}
+                />
+            </View>
+            <View>
+                <Button
+                    title="Flip Camera"
+                    onPress={() => {
+                        setType(
+                            type === Camera.Constants.Type.back
+                                ? Camera.Constants.Type.front
+                                : Camera.Constants.Type.back
+                        );
+                    }}>
+                </Button>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    containerStyle:{
+    containerStyle: {
         flex: 1
     },
-    cameraStyle:{
-        flex: 1
-    },
-    buttonContainerStyle:{
+    cameraContainerStyle: {
         flex: 1,
-        backgroundColor: 'transparent',
         flexDirection: 'row'
     },
-    buttonStyle:{
-        flex: 0.1,
-        alignSelf: 'flex-end',
-        alignItems: 'center'
-    },
-    textStyle:{
-        fontSize: 18
+    cameraStyle: {
+        flex: 1,
+        aspectRatio: 1
     }
 })
