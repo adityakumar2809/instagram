@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchUser } from '../redux/actions/index'
 import FeedScreen from './main/Feed'
+import ProfileScreen from './main/Profile'
+import AddScreen from './main/Add'
 
 const Tab = createBottomTabNavigator();
 
@@ -30,6 +32,32 @@ export class Main extends Component {
                         tabBarIcon: ({color, size}) => (
                             <MaterialCommunityIcons 
                                 name='home'
+                                color={color}
+                                size={26}
+                            />
+                        )
+                    }} 
+                />
+                <Tab.Screen 
+                    name="Add" 
+                    component={ AddScreen }
+                    options={{
+                        tabBarIcon: ({color, size}) => (
+                            <MaterialCommunityIcons 
+                            name='plus-box'
+                            color={color}
+                            size={26}
+                            />
+                            )
+                        }} 
+                />
+                <Tab.Screen 
+                    name="Profile" 
+                    component={ ProfileScreen }
+                    options={{
+                        tabBarIcon: ({color, size}) => (
+                            <MaterialCommunityIcons 
+                                name='account-circle'
                                 color={color}
                                 size={26}
                             />
