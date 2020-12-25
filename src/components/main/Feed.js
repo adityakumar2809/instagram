@@ -10,23 +10,16 @@ function Feed(props) {
 
 
     useEffect(() => {
-        let posts = [];
-        if (props.usersFollowingLoaded == props.following.length) {
-            for (let i = 0; i < props.following.length; i++) {
-                const user = props.users.find((el) => {
-                    return (el.uid === props.following[i])
-                })
-                if (user != undefined) {
-                    posts = [...posts, ...user.posts]
-                }
-
-            }
-            posts.sort(function (x, y) {
+        if (
+            (props.usersFollowingLoaded == props.following.length)
+            && (props.following.length !== 0)
+        ) {
+            props.feed.sort(function (x, y) {
                 return (x.creation - y.creation)
             })
-            setPosts(posts)
+            setPosts(props.feed)
         }
-    }, [props.usersFollowingLoaded])
+    }, [props.usersFollowingLoaded, props.feed])
 
     return (
         <View style={styles.containerStyle}>
@@ -37,7 +30,9 @@ function Feed(props) {
                     data={posts}
                     renderItem={({ item }) => (
                         <View style={styles.imageContainerStyle}>
-                            <Text style={styles.infoContainerStyle}>{item.user.name}</Text>
+                            <Text style={styles.infoContainerStyle}>
+                                {item.user.name}
+                            </Text>
                             <Image
                                 source={{ uri: item.downloadURL }}
                                 style={styles.imageStyle}
@@ -45,13 +40,13 @@ function Feed(props) {
                             <Text onPress={() => (
                                 props.navigation.navigate(
                                     'Comment',
-                                    { 
+                                    {
                                         postId: item.id,
                                         uid: item.user.uid
                                     }
                                 )
                             )}>
-                                View Comments...{item.id}---{item.user.uid}
+                                View Comments...
                             </Text>
                         </View>
                     )}
@@ -64,7 +59,7 @@ function Feed(props) {
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
     following: store.userState.following,
-    users: store.usersState.users,
+    feed: store.usersState.feed,
     usersFollowingLoaded: store.usersState.usersFollowingLoaded,
 })
 
