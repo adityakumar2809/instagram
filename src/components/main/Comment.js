@@ -84,7 +84,7 @@ function Comment(props) {
                     <View>
                         {
                             item.user !== undefined
-                                ? <Text>{item.user.name}</Text>
+                                ? <Text>@{item.user.name}</Text>
                                 : null
                         }
                         <Text>{item.text}</Text>
