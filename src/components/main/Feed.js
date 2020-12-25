@@ -19,6 +19,8 @@ function Feed(props) {
             })
             setPosts(props.feed)
         }
+        console.log("New and Important stuff");
+        console.log(posts);
     }, [props.usersFollowingLoaded, props.feed])
 
     return (
