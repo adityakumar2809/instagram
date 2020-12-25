@@ -1,12 +1,20 @@
 import firebase from 'firebase'
 import 'firebase/firestore';
-import { 
-    USER_POSTS_STATE_CHANGE, 
-    USER_STATE_CHANGE, 
-    USER_FOLLOWING_STATE_CHANGE, 
-    USERS_DATA_STATE_CHANGE, 
-    USERS_POSTS_STATE_CHANGE
+import {
+    USER_POSTS_STATE_CHANGE,
+    USER_STATE_CHANGE,
+    USER_FOLLOWING_STATE_CHANGE,
+    USERS_DATA_STATE_CHANGE,
+    USERS_POSTS_STATE_CHANGE,
+    CLEAR_DATA
 } from '../constants/index'
+
+
+export function clearData() {
+    return ((dispatch) => {
+        dispatch({ type: CLEAR_DATA })
+    })
+}
 
 export function fetchUser() {
     return ((dispatch) => {
@@ -64,7 +72,7 @@ export function fetchUserFollowing() {
                     type: USER_FOLLOWING_STATE_CHANGE,
                     following
                 })
-                for(let i = 0; i < following.length; i++) {
+                for (let i = 0; i < following.length; i++) {
                     dispatch(fetchUsersData(following[i]));
                 }
             })
