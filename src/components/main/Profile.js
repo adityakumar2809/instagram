@@ -10,9 +10,9 @@ function Profile(props) {
     const [user, setUser] = useState(null);
     const [following, setFollowing] = useState(false);
 
-    
+
     useEffect(() => {
-        const {currentUser, posts} = props;
+        const { currentUser, posts } = props;
 
         if (props.route.params.uid === firebase.auth().currentUser.uid) {
             setUser(currentUser);
@@ -46,7 +46,7 @@ function Profile(props) {
                 })
         }
 
-        if(props.following.indexOf(props.route.params.uid) > -1) {
+        if (props.following.indexOf(props.route.params.uid) > -1) {
             setFollowing(true);
         } else {
             setFollowing(false);
@@ -56,20 +56,24 @@ function Profile(props) {
 
     const onFollow = () => {
         firebase.firestore()
-        .collection('following')
-        .doc(firebase.auth().currentUser.uid)
-        .collection('userFollowing')
-        .doc(props.route.params.uid)
-        .set({});
+            .collection('following')
+            .doc(firebase.auth().currentUser.uid)
+            .collection('userFollowing')
+            .doc(props.route.params.uid)
+            .set({});
     }
-    
+
     const onUnfollow = () => {
         firebase.firestore()
-        .collection('following')
-        .doc(firebase.auth().currentUser.uid)
-        .collection('userFollowing')
-        .doc(props.route.params.uid)
-        .delete();
+            .collection('following')
+            .doc(firebase.auth().currentUser.uid)
+            .collection('userFollowing')
+            .doc(props.route.params.uid)
+            .delete();
+    }
+
+    const onLogout = () => {
+        firebase.auth().signOut();
     }
 
     if (user == null) {
@@ -102,7 +106,10 @@ function Profile(props) {
                             }
                         </View>
                         :
-                        null
+                        <Button
+                            title='Logout'
+                            onPress={() => onLogout()}
+                        />
                 }
             </View>
             <View style={styles.galleryContainerStyle}>
