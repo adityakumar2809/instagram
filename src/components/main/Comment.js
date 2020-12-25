@@ -37,6 +37,19 @@ export default function Comment(props) {
         }
     }, [props.route.params.postId])
 
+    const onCommentSend = () => {
+        firebase.firestore()
+            .collection('posts')
+            .doc(props.route.params.uid)
+            .collection('userPosts')
+            .doc(postId)
+            .collection('comments')
+            .add({
+                creator: firebase.auth().currentUser.uid,
+                text: text
+            })
+    }
+
     return (
         <View>
             <FlatList
@@ -49,6 +62,21 @@ export default function Comment(props) {
                     </View>
                 )} 
             />
+
+            <View>
+                <TextInput
+                    placeholder="Enter comment here..."
+                    onChangeText={(text) => (
+                        setText(text)
+                    )}
+                />
+                <Button
+                    title="Save Comment"
+                    onPress={() => (
+                        onCommentSend()
+                    )}
+                />
+            </View>
         </View>
     )
 }
