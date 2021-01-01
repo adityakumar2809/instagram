@@ -91,7 +91,7 @@ function Feed(props) {
                                         <MaterialCommunityIcons
                                             name='heart'
                                             size={26}
-                                            color={ colors.ICON_COLOR }
+                                            color={colors.ICON_COLOR}
                                         />
                                     </TouchableOpacity>
                                     :
@@ -106,21 +106,27 @@ function Feed(props) {
                                         <MaterialCommunityIcons
                                             name='heart-outline'
                                             size={26}
-                                            color={ colors.ICON_COLOR }
+                                            color={colors.ICON_COLOR}
                                         />
                                     </TouchableOpacity>
                             }
-                            <Text onPress={() => (
-                                props.navigation.navigate(
-                                    'Comment',
-                                    {
-                                        postId: item.id,
-                                        uid: item.user.uid
-                                    }
-                                )
-                            )}>
-                                View Comments...
-                            </Text>
+                            <TouchableOpacity
+                                onPress={() => (
+                                    props.navigation.navigate(
+                                        'Comment',
+                                        {
+                                            postId: item.id,
+                                            uid: item.user.uid
+                                        }
+                                    )
+                                )}
+                            >
+                                <MaterialCommunityIcons
+                                    name='comment-text-multiple'
+                                    size={26}
+                                    color={colors.ICON_COLOR}
+                                />
+                            </TouchableOpacity>
                             <Spacer />
                         </View>
                     )}
@@ -152,7 +158,7 @@ const styles = StyleSheet.create({
     },
     imageContainerStyle: {
         flex: 1 / 3,
-        borderColor: '#606060',
+        borderColor: colors.FEED_BORDER_COLOR,
         borderBottomWidth: 0.5
     },
     imageStyle: {
