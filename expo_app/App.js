@@ -64,6 +64,15 @@ export class App extends Component {
         })
     }
 
+    screenOptions = {
+        mainScreenOptions: { 
+            headerShown: true,
+            headerTitle: 'Instagram',
+            headerTitleAlign: 'center',
+            headerTitleAllowFontScaling: true
+        }
+    }
+
     render() {
         const { loggedIn, loaded } = this.state;
 
@@ -104,7 +113,7 @@ export class App extends Component {
                         <Stack.Screen
                             name="Main"
                             component={MainScreen}
-                            options={{ headerShown: true }}
+                            options={ this.screenOptions.mainScreenOptions }
                             navigation={this.props.navigation}
                         />
                         <Stack.Screen
