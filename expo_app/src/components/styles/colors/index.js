@@ -1,0 +1,1 @@
+export const APP_BACKGROUND_COLOR = '#303030'
