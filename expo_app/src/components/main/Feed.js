@@ -77,57 +77,64 @@ function Feed(props) {
                                 source={{ uri: item.downloadURL }}
                                 style={styles.imageStyle}
                             />
-                            {
-                                item.currentUserLike
-                                    ?
-                                    <TouchableOpacity
-                                        onPress={() => (
-                                            onDislikePress(
-                                                item.user.uid,
-                                                item.id
-                                            )
-                                        )}
-                                    >
-                                        <MaterialCommunityIcons
-                                            name='heart'
-                                            size={26}
-                                            color={colors.ICON_COLOR}
-                                        />
-                                    </TouchableOpacity>
-                                    :
-                                    <TouchableOpacity
-                                        onPress={() => (
-                                            onLikePress(
-                                                item.user.uid,
-                                                item.id
-                                            )
-                                        )}
-                                    >
-                                        <MaterialCommunityIcons
-                                            name='heart-outline'
-                                            size={26}
-                                            color={colors.ICON_COLOR}
-                                        />
-                                    </TouchableOpacity>
-                            }
-                            <TouchableOpacity
-                                onPress={() => (
-                                    props.navigation.navigate(
-                                        'Comment',
-                                        {
-                                            postId: item.id,
-                                            uid: item.user.uid
-                                        }
-                                    )
-                                )}
-                            >
-                                <MaterialCommunityIcons
-                                    name='comment-text-multiple'
-                                    size={26}
-                                    color={colors.ICON_COLOR}
-                                />
-                            </TouchableOpacity>
-                            <Spacer />
+                            <View style={styles.iconsContainerStyle}>
+                                {
+                                    item.currentUserLike
+                                        ?
+                                        <TouchableOpacity
+                                            onPress={() => (
+                                                onDislikePress(
+                                                    item.user.uid,
+                                                    item.id
+                                                )
+                                            )}
+                                            style={styles.iconStyle}
+                                        >
+                                            <MaterialCommunityIcons
+                                                name='heart'
+                                                size={26}
+                                                color={colors.ICON_COLOR}
+                                            />
+                                        </TouchableOpacity>
+                                        :
+                                        <TouchableOpacity
+                                            onPress={() => (
+                                                onLikePress(
+                                                    item.user.uid,
+                                                    item.id
+                                                )
+                                            )}
+                                            style={styles.iconStyle}
+                                        >
+                                            <MaterialCommunityIcons
+                                                name='heart-outline'
+                                                size={26}
+                                                color={colors.ICON_COLOR}
+                                            />
+                                        </TouchableOpacity>
+                                }
+                                <TouchableOpacity
+                                    onPress={() => (
+                                        props.navigation.navigate(
+                                            'Comment',
+                                            {
+                                                postId: item.id,
+                                                uid: item.user.uid
+                                            }
+                                        )
+                                    )}
+                                    style={styles.iconStyle}
+                                >
+                                    <MaterialCommunityIcons
+                                        name='comment-text-multiple'
+                                        size={26}
+                                        color={colors.ICON_COLOR}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.captionContainerStyle}>
+                                <Text style={styles.captionStyle}>{ item.caption }</Text>
+                            </View>
                         </View>
                     )}
                 />
@@ -164,6 +171,19 @@ const styles = StyleSheet.create({
     imageStyle: {
         flex: 1,
         aspectRatio: 1 / 1
+    },
+    iconsContainerStyle: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    iconStyle: {
+        margin: 10
+    },
+    captionContainerStyle: {
+
+    },
+    captionStyle: {
+        color: colors.APP_FONT_COLOR
     }
 })
 
