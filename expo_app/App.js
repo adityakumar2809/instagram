@@ -34,6 +34,8 @@ import SaveScreen from './src/components/main/Save'
 import ProfileScreen from './src/components/main/Profile'
 import CommentScreen from './src/components/main/Comment'
 
+import colors from './src/components/styles/colors'
+
 
 
 
@@ -69,7 +71,15 @@ export class App extends Component {
             headerShown: true,
             headerTitle: 'Instagram',
             headerTitleAlign: 'center',
-            headerTitleAllowFontScaling: true
+            headerTitleAllowFontScaling: true,
+            headerStyle: {
+                backgroundColor: colors.HEADER_BACKGROUND_COLOR,
+                elevation: 0,
+                shadowOpacity: 0,
+            },
+            headerTitleStyle: {
+                color: colors.HEADER_FONT_COLOR
+            }
         }
     }
 

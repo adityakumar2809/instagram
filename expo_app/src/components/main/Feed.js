@@ -1,9 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, FlatList, StyleSheet, Button } from 'react-native'
+import {
+    View,
+    Text,
+    Image,
+    FlatList,
+    StyleSheet,
+    Button,
+    TouchableOpacity
+} from 'react-native'
+
+import
+MaterialCommunityIcons
+    from
+    'react-native-vector-icons/MaterialCommunityIcons';
+
 import firebase from 'firebase'
 require('firebase/firestore')
 
 import { connect } from 'react-redux'
+
+import Spacer from '../individual/Spacer'
+import colors from '../styles/colors'
 
 function Feed(props) {
     const [posts, setPosts] = useState([]);
@@ -63,25 +80,35 @@ function Feed(props) {
                             {
                                 item.currentUserLike
                                     ?
-                                    <Button
-                                        title='Dislike'
+                                    <TouchableOpacity
                                         onPress={() => (
                                             onDislikePress(
                                                 item.user.uid,
                                                 item.id
                                             )
                                         )}
-                                    />
+                                    >
+                                        <MaterialCommunityIcons
+                                            name='heart'
+                                            size={26}
+                                            color={ colors.ICON_COLOR }
+                                        />
+                                    </TouchableOpacity>
                                     :
-                                    <Button
-                                        title='Like'
+                                    <TouchableOpacity
                                         onPress={() => (
                                             onLikePress(
                                                 item.user.uid,
                                                 item.id
                                             )
                                         )}
-                                    />
+                                    >
+                                        <MaterialCommunityIcons
+                                            name='heart-outline'
+                                            size={26}
+                                            color={ colors.ICON_COLOR }
+                                        />
+                                    </TouchableOpacity>
                             }
                             <Text onPress={() => (
                                 props.navigation.navigate(
@@ -94,6 +121,7 @@ function Feed(props) {
                             )}>
                                 View Comments...
                             </Text>
+                            <Spacer />
                         </View>
                     )}
                 />
@@ -112,15 +140,20 @@ const mapStateToProps = (store) => ({
 const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
+        backgroundColor: colors.APP_BACKGROUND_COLOR,
     },
     infoContainerStyle: {
-        margin: 20
+        margin: 20,
+        color: colors.APP_FONT_COLOR,
+        fontWeight: 'bold'
     },
     galleryContainerStyle: {
 
     },
     imageContainerStyle: {
-        flex: 1 / 3
+        flex: 1 / 3,
+        borderColor: '#606060',
+        borderBottomWidth: 0.5
     },
     imageStyle: {
         flex: 1,
