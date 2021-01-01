@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     },
     imageContainerStyle: {
         flex: 1 / 3,
-        borderColor: colors.FEED_BORDER_COLOR,
+        borderColor: colors.BORDER_COLOR,
         borderBottomWidth: 0.5
     },
     imageStyle: {

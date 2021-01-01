@@ -16,6 +16,7 @@ import {
 import FeedScreen from './main/Feed'
 import ProfileScreen from './main/Profile'
 import SearchScreen from './main/Search'
+import colors from './styles/colors';
 
 const Tab = createMaterialBottomTabNavigator();
 const EmptyScreen = () => {
@@ -37,7 +38,11 @@ export class Main extends Component {
             )
         }
         return (
-            <Tab.Navigator initialRouteName="Feed" labeled={false}>
+            <Tab.Navigator 
+                initialRouteName="Feed" 
+                labeled={false}
+                barStyle={styles.barStyle}
+            >
                 <Tab.Screen
                     name="Feed"
                     component={FeedScreen}
@@ -126,4 +131,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center'
     },
+    barStyle: {
+        backgroundColor: colors.APP_BACKGROUND_COLOR,
+        borderTopWidth: 0.5,
+        borderColor: colors.BORDER_COLOR,
+        opacity: 1
+    }
 });

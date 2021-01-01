@@ -5,7 +5,7 @@ var colors = function() {
         APP_BACKGROUND_COLOR: '#303030',
         APP_FONT_COLOR: '#FFFFFF',
         ICON_COLOR: '#FFFFFF',
-        FEED_BORDER_COLOR: '#606060'
+        BORDER_COLOR: '#606060'
     })
 }();
 
